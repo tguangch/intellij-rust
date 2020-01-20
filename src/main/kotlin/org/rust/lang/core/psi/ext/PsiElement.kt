@@ -228,10 +228,22 @@ val PsiElement.contextualFile: PsiFile
     }
 
 /**
+ * Finds first sibling that is not whitespace before given element.
+ */
+fun PsiElement?.getPrevNonWhitespaceSibling(): PsiElement? =
+    PsiTreeUtil.skipSiblingsBackward(this, PsiWhiteSpace::class.java)
+
+/**
  * Finds first sibling that is neither comment, nor whitespace before given element.
  */
 fun PsiElement?.getPrevNonCommentSibling(): PsiElement? =
     PsiTreeUtil.skipSiblingsBackward(this, PsiWhiteSpace::class.java, PsiComment::class.java)
+
+/**
+ * Finds first sibling that is not whitespace after given element.
+ */
+fun PsiElement?.getNextNonWhitespaceSibling(): PsiElement? =
+    PsiTreeUtil.skipSiblingsForward(this, PsiWhiteSpace::class.java)
 
 /**
  * Finds first sibling that is neither comment, nor whitespace after given element.
